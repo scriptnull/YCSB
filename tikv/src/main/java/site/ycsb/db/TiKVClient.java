@@ -48,7 +48,7 @@ public class TiKVClient extends DB {
 
   private RawKVClient rawClient;
 
-  public static final String PD_ADDRESS = "pd.address"
+  public static final String PD_ADDRESS = "pd.address";
 
   public void init() throws DBException {
     Properties props = getProperties();
