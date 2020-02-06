@@ -29,8 +29,8 @@ import site.ycsb.DB;
 import site.ycsb.DBException;
 import site.ycsb.Status;
 import site.ycsb.StringByteIterator;
-import org.tikv.common.TiSession;
-import org.tikv.raw.RawKVClient;
+import com.pingcap.tikv.common.TiSession;
+import com.pingcap.tikv.raw.RawKVClient;
 
 import java.io.Closeable;
 import java.io.IOException;
