@@ -35,7 +35,6 @@ import org.tikv.raw.RawKVClient;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.Vector;
