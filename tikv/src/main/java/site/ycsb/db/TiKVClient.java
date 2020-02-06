@@ -35,9 +35,6 @@ import org.tikv.raw.RawKVClient;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -59,9 +56,9 @@ public class TiKVClient extends DB {
     
     String pdAddress = props.getProperty(PD_ADDRESS);
     TiConfiguration conf = TiConfiguration.createRawDefault(pdAddress);
-		TiSession session = TiSession.create(conf);
+    TiSession session = TiSession.create(conf);
 
-		rawClient = session.createRawKVClient();
+    rawClient = session.createRawKVClient();
   }
 
   public void cleanup() throws DBException {
