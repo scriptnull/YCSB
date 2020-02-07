@@ -29,12 +29,14 @@ import site.ycsb.DB;
 import site.ycsb.DBException;
 import site.ycsb.Status;
 import site.ycsb.StringByteIterator;
-import com.pingcap.tikv.tikv-client.common.TiSession;
-import com.pingcap.tikv.tikv-client.raw.RawKVClient;
+//import org.tikv.common.TiSession;
+//import org.tikv.raw.RawKVClient;
+import org.tikv.common.*;
+import org.tikv.raw.*;
+import shade.com.google.protobuf.ByteString;
 
-import java.io.Closeable;
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.Vector;
@@ -57,15 +59,11 @@ public class TiKVClient extends DB {
     TiConfiguration conf = TiConfiguration.createRawDefault(pdAddress);
     TiSession session = TiSession.create(conf);
 
-    rawClient = session.createRawKVClient();
+    rawClient = session.createRawClient();
   }
 
   public void cleanup() throws DBException {
-    try {
-      ((Closeable) rawClient).close();
-    } catch (IOException e) {
-      throw new DBException("Closing connection failed.");
-    }
+    rawClient.close();
   }
 
   @Override
@@ -82,9 +80,11 @@ public class TiKVClient extends DB {
   @Override
   public Status insert(String table, String key,
       Map<String, ByteIterator> values) {
-    System.err.printf("table, key, values = %s, %s, %s \n", table, key, StringByteIterator.getStringMap(values));
+//    System.err.printf("table, key, values = %s, %s, %s \n", table, key,
+//        StringByteIterator.getStringMap(values).toString());
     try {
-      rawClient.put(ByteString.copyFromUtf8(table + "_" + key), StringByteIterator.getStringMap(values));
+      rawClient.put(ByteString.copyFromUtf8(table + "_" + key),
+          ByteString.copyFromUtf8(StringByteIterator.getStringMap(values).toString()));
       return Status.OK;
     } catch (Exception e) {
       return Status.ERROR;

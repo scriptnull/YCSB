@@ -31,8 +31,8 @@ LICENSE file.
 
   <dependencies>
     <dependency>
-        <groupId>com.pingcap.tikv</groupId>
-        <artifactId>tikv-client</artifactId>
+        <groupId>org.tikv</groupId>
+        <artifactId>tikv-client-java</artifactId>
         <version>${tikv.version}</version>
     </dependency>
     <dependency>
